@@ -1,11 +1,15 @@
 import React from 'react'
+import {NextUIProvider} from "@nextui-org/react";
+import "tailwindcss/tailwind.css";
+import UserForm from './UserForm.jsx';
 
 function App (){
 
   return (
-    <div>
+    <NextUIProvider>
       <h2>Hello! App works!</h2>
-    </div>
+      <UserForm/>
+    </NextUIProvider>
   );
 }
 
