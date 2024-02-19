@@ -12,8 +12,8 @@ export default function UserForm ({ hitSearch }) {
 
   const handleSubmit = (e) => {
     const successCallback = (position) => {
-      console.log(position)
-      console.log(position.coords)
+      // console.log(position)
+      // console.log(position.coords)
       setLatitude(position.coords.latitude)
       setLongitude(position.coords.longitude)
     }
