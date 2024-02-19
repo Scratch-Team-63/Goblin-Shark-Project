@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Input, Button, ButtonGroup} from "@nextui-org/react";
 import DropDown from './DropDown.jsx';
 
-export default function UserForm ({ hitSearch }) {
+export default function UserForm ( { hitSearch } ) {
   const [cuisine, setCuisine] = useState('');
   const [distance, setDistance] = useState('');
   const [budget, setBudget] = useState('');
