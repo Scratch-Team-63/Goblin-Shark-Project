@@ -2,12 +2,9 @@ const express = require("express");
 const axios = require("axios");
 const path = require("path");
 
-// const optionsController = require('./controllers/optionsController')
+const apiController = require('./controllers/apiController.js')
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-const APIKey = '&apiKey=defaa8ca6e284a7a8f4ab022633fd8f5'
-
 
 
 // Serve static files from the 'dist' directory
@@ -23,10 +20,29 @@ app.get("/bundle.js", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "client", "dist", "bundle.js"), {});
 });
 
-
 app.get("/", (req, res) => {
   console.log("Request for INDEX.HTML received");
   res.sendFile(path.join(__dirname, "..", "client", "dist", "index.html"));
+});
+
+app.get('/api/search/:cuisine/:distance/:budget/:latitude/:longitude', apiController.formatRequestData, (req, res) => {
+  const {restaurantData} = res.locals
+  return res.status(200).json(restaurantData);
+});
+
+app.use('*', (req,res) => {
+  res.status(404).send('Not Found');
+});
+
+app.use((err, req, res, next) => {
+  const defaultObj = {
+    log:'Express error handler caught unknown middleware error',
+    status: 500,
+    message: {err: 'An error occurred'}
+  }
+  const errObj = Object.assign({}, defaultObj, err);
+  console.log(errObj.log);
+  return res.status(errObj.status).json(errObj.message);
 });
 
 
