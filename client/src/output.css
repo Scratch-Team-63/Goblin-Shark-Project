@@ -7,6 +7,52 @@
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
+.mainContainer {
+  display: grid;
+  justify-content: center;
+  align-items: start;
+  background: rgb(196, 197, 197)
+}
+
+.userFormContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; 
+  width: 300px;
+}
+.userFormItem {
+  margin: 10px;
+}
+
+.displayContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.restaurant {
+  grid-column: span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+}
+
+.restaurantImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+}
+
+/* .restaurantFooter {
+
+} */
 
 ::before,
 ::after {

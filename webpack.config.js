@@ -44,4 +44,8 @@ const config = {
   ],
 };
 
+// nextui({
+//   addCommonColors: true,
+// }),
+
 module.exports = config;
