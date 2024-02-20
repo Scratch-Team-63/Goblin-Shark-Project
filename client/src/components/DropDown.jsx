@@ -1,7 +1,10 @@
 import React from "react";
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 
-export default function DropDown({ setCuisine }) {
+export default function DropDown({ cuisine, setCuisine }) {
+
+  const selectedValue = cuisine;
+  
   const cuisines = [
     "African", "Asian", "American", "British", "Cajun", "Caribbean", "Chinese",
     "Eastern European", "European", "French", "German", "Greek", "Indian", "Irish",
@@ -12,9 +15,11 @@ export default function DropDown({ setCuisine }) {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="bordered">Open Menu</Button>
+        <Button style={{color: "white", backgroundColor:"#52CC7A"}} >{selectedValue}</Button>
       </DropdownTrigger>
-      <DropdownMenu aria-label="Static Actions">
+      <DropdownMenu aria-label="Static Actions"
+       selectionMode="single"
+       >
         {cuisines.map((cuisine, index) => (
           <DropdownItem
             key={index}
