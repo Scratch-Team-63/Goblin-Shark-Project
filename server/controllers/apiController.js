@@ -2,7 +2,7 @@ const express = require('express');
 const apiController = {}
 const axios = require('axios');
 
-const APIKey = 'defaa8ca6e284a7a8f4ab022633fd8f5'
+const APIKey = '1e971a009f6e4ab1bd6aa263960bd053'
 
 apiController.formatRequestData = async (req, res, next) => {
   const {cuisine, budget, distance, latitude, longitude} = req.params

@@ -61,9 +61,9 @@ export default function UserForm ( { hitSearch, loadingState, setLoadingState, s
   return (
     <div className="userFormContainer">
       <DropDown className="userFormItem" color="secondary" setCuisine={setCuisine} cuisine={cuisine}/>
-      <Input className="userFormItem" color={isInvalidDistance && "danger"} errorMessage={isInvalidDistance && "Please enter a valid distance (<20 mi)"} endContent="mi" onChange={(e) => setDistance(e.target.value)} style={{ border: 'none'}} size="md" label="How close does it need to be?" labelPlacement="outside" placeholder="distance (in miles)"/>
+      <Input className="userFormItem" color={isInvalidDistance && "danger"} errorMessage={isInvalidDistance && "Please enter a valid distance (<20 mi)"} endContent="mi" onChange={(e) => setDistance(e.target.value)} style={{ border: 'none'}} size="md" label={<span style={{ color: 'black' }}>How close does it need to be?</span>} labelPlacement="outside" placeholder="distance (in miles)"/>
       {/* add maximum distance */}
-      <Input className="userFormItem" color={isInvalidBudget && "danger"} errorMessage={isInvalidBudget && "Please enter a valid dollar value"} startContent="$" onChange={(e) => setBudget(e.target.value)} style={{ border: 'none'}} size="md" label="How much are you tryna spend?" labelPlacement="outside" placeholder="budget (in USD)"/>
+      <Input className="userFormItem" color={isInvalidBudget && "danger"} errorMessage={isInvalidBudget && "Please enter a valid dollar value"} startContent="$" onChange={(e) => setBudget(e.target.value)} style={{ border: 'none'}} size="md" label={<span style={{ color: 'black' }}>How much are you tryna spend?</span>} labelPlacement="outside" placeholder="budget (in USD)"/>
       {/* <UserLocation setLatitude={(latitude) => setLatitude(latitude)} setLongitude={(longitude) => setLongitude(longitude)}/> */}
       {incompleteFields && <h2 style={{color: 'red'}}>Incomplete Fields!</h2>}
       <Button isLoading={loadingState} color="primary" onPress={handleSubmit} className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg userFormItem" size="md" >{submitButtonText}</Button>
@@ -71,9 +71,4 @@ export default function UserForm ( { hitSearch, loadingState, setLoadingState, s
   )
 }
 
-//conditional
-//
-// if (!cuisine || !distance || !budget || !latitude || !longitude) {
-//
-// } else {
-//
+
