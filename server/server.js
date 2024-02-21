@@ -6,6 +6,7 @@ const apiController = require('./controllers/apiController.js')
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+//stretch goal to add map
 
 // Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, "client", "dist")));
