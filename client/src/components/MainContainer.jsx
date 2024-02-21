@@ -10,7 +10,7 @@ export default function MainContainer () {
     const [errorMessage, setErrorMessage] = useState('');
     const [loadingState, setLoadingState] = useState(false)
     const [submitButtonText, setSubmitButtonText] = useState('Find Restaurants!')
-  
+
     const handleSearch = async (cuisine, distance, budget, latitude, longitude) => {
       try {
         if (latitude !== '') {
@@ -21,8 +21,8 @@ export default function MainContainer () {
           const response = await axios.get(`/api/search/${cuisine}/${distance}/${budget}/${latitude}/${longitude}`);
           setLoadingState(false)
           setSubmitButtonText('Find Restaurants!')
-          console.log(response)
-          console.log(response.data);
+          // console.log(response)
+          // console.log(response.data);
           setDisplayData(response.data);
         }
       } catch (error) {

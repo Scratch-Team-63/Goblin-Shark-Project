@@ -8,17 +8,18 @@
 */
 
 .mainContainer {
-  display: grid;
+  display: flex;
   justify-content: center;
-  align-items: start;
-  background: rgb(196, 197, 197)
+  align-items: center;
+  background: rgb(196, 197, 197);
+  flex-direction: column;
 }
 
 .userFormContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column; 
+  flex-direction: column;
   width: 300px;
 }
 .userFormItem {
@@ -49,7 +50,18 @@
   width: 300px;
   height: 300px;
 }
-
+.text-tiny {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.px-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 /* .restaurantFooter {
 
 } */
