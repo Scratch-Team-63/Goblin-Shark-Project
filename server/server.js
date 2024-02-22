@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const path = require("path");
 const cookieParser = require('cookie-parser');
-const UserController = require('./UserController/UserController.js');
+const UserController = require('./userController/UserController.js');
 
 const mongoose = require('mongoose');
 
