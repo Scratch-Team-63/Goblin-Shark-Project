@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navigationbar from './Navigationbar.jsx'
 import { Input } from "@nextui-org/react";
 
 
@@ -69,6 +70,8 @@ export default function Signup() {
 
     // render to page
     return (
+        <>
+        <Navigationbar/>
         <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
             <form onSubmit={handleSubmit}>
                 <Input type="text" name="firstName" value={formData.firstName} placeholder="Enter your first name" onChange={handleChange} required />
@@ -78,6 +81,7 @@ export default function Signup() {
                 <button type="submit">Sign up</button>
             </form>
         </div>
+        </>
     );
 };
   

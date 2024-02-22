@@ -1,7 +1,15 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
 
 export default function Navigationbar() {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/signup');
+  }
+
   return (
     <Navbar>
       <NavbarBrand>
@@ -29,7 +37,7 @@ export default function Navigationbar() {
           <Link href="#">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={Link} color="primary" href="#" variant="flat" onClick={handleClick}>
             Sign Up
           </Button>
         </NavbarItem>
