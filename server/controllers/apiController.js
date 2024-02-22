@@ -5,10 +5,12 @@ const axios = require('axios');
 const APIKey = '33947aed9eea45cebd7db089fdc3e7c0'
 
 apiController.formatRequestData = async (req, res, next) => {
+  console.log('formatRequestData');
   const {cuisine, budget, distance, latitude, longitude} = req.params
   // console.log(cuisine, budget, distance, latitude, longitude);
   try{
-    if (!cuisine || !budget || !distance || !latitude || !longitude) {
+    if (cuisine !== 'string' || typeof budget !== 'number' || typeof distance !== 'number' || typeof latitude !== 'number' || typeof longitude !== 'number' ) {
+      console.log('bad request active');
       return next({
         log:'Express error handler caught apiController.formatRequestData middleware error',
         status: 500,

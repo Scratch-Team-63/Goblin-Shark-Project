@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import FavoriteCard from './favoriteCard.jsx';
+import axios from "axios";
+
 import {
   Card,
   CardHeader,
@@ -11,30 +14,114 @@ import {
   PopoverTrigger,
   PopoverContent,
   Button,
-  Checkbox
+  Checkbox,
+  user
 } from "@nextui-org/react";
 import { HeartIcon } from "../HeartIcon.jsx";
 
 
 export default function DisplayContainer({ fetchedData }) {
-  const [checked, setChecked] = useState({});
+  const [checked, setChecked] = useState(false);
+  const [userFavorites, setUserFavorites] = useState([]);
   const [isFlippedArray, setIsFlippedArray] = useState(
     new Array(fetchedData.length).fill(false)
   );
-  console.log(checked)
+
+// // const saveFavorites = (/*{array of favorite cards from the backend*/}, event) => {
+//   setClickedfavs(prev => {
+//     if (prev.includes(/*array of favorite cards*/)) {
+//       // If the fav is already in the array, remove it
+//       return prev.filter(favoriteCard => favoriteCard  !== /*array of favorite cards*/);
+//     } else {
+//       // If the favoriteCard is not in the array, add it
+//       return [...prev, /*array of favorite cards*/];
+//     }
+//   });
+
+
   // Function to flip the card at a specific index
   const flipCard = (index) => {
     console.log('FlipCard is called')
-    setIsFlippedArray((prevState) => {
-      const newState = [...prevState];
-      newState[index] = !newState[index];
-      console.log('New State', newState)
-      return newState;
+    setIsFlippedArray((prevfav) => {
+      const newfav = [...prevfav];
+      newfav[index] = !newfav[index];
+      console.log('New fav', newfav)
+      return newfav;
     });
   };
 
+
+  //add functition to populate favorite
+
+
+  function AddFavorite() {
+    const [favoriteData, setFavoriteData] = useState({
+        name: "",
+        local_hours: { operational: {} },
+        phone_number: "",
+        logo_photos: [],
+        weighted_rating_value: "",
+        address: {
+            city: "",
+            country: "",
+            lat: "",
+            latitude: "",
+            lon: "",
+            longitude: "",
+            state: "",
+            street_addr: "",
+            street_addr_2: "",
+            zipcode: ""
+        },
+        miles: "",
+        is_open: true,
+        cuisines: [],
+    });
+
+
+  
+
+  // Fetch user favorites when the component mounts
+  useEffect(() => {
+    const fetchUserFavorites = async () => {
+      try {
+        // Make a GET request to fetch user favorites from the backend
+        const response = await axios.get("/getuserfavorites");
+        setUserFavorites(response.data); // Update fav with fetched favorites
+      } catch (error) {
+        console.error("Error fetching user favorites:", error);
+      }
+    };
+    fetchUserFavorites();
+  }, []);
+
+
+
+  //when favorite is clicked, the object that was clicked is added to userFavorites
+  const handleFavoriteClick = async (item) => {
+
+    console.log('HandleFavoriteClick called')
+    try {
+      // Make a POST request to add the clicked item to userFavorites
+      await axios.post("/addUserFavorite", item);
+      setUserFavorites([...userFavorites, item]);
+    } catch (error) {
+      console.error("Error adding user favorite:", error);
+    }
+  };
+
+
+
+
   return (
-    <div className="gap-2 grid grid-cols-2 sm:grid-cols-4 displayContainer">
+    <>
+    {/* favorites container */}
+     <div id='favCon' className="gap-2 grid grid-cols-2 sm:grid-cols-4 displayContainer"> 
+      <FavoriteCard favoritesArray={userFavorites}/>
+     </div>
+
+     {/* results container */}
+     <div className="gap-2 grid grid-cols-2 sm:grid-cols-4 displayContainer">
       {fetchedData.map((item, index) => (
         <div
           className={`card ${isFlippedArray[index] ? "is-flipped" : ""}`}
@@ -56,8 +143,7 @@ export default function DisplayContainer({ fetchedData }) {
             <div className="flex items-center">
               <Checkbox
                 checked={checked}
-                onChange={() => {
-                  setChecked(item.name, item.phone_number)}}
+                onChange={() => {setChecked; handleFavoriteClick(item)}}
                 description={checked ? 'Unfavorite' : 'Favorite'}
                 icon={<HeartIcon filled={checked} />}
               />
@@ -118,7 +204,7 @@ export default function DisplayContainer({ fetchedData }) {
                 {", "}
                 {item.address.city}
                 {", "}
-                {item.address.state}
+                {item.address.fav}
                 {", "}
                 {item.miles.toFixed(2)}
                 {" mi away, "}Is open: {item.is_open ? "Yes" : "No"}
@@ -131,7 +217,8 @@ export default function DisplayContainer({ fetchedData }) {
         </div>
       ))}
     </div>
+    </>
+   
   );
 }
-
-//hello world
+}
