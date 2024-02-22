@@ -1,10 +1,36 @@
 const express = require("express");
 const axios = require("axios");
 const path = require("path");
+const cookieParser = require('cookie-parser');
+const UserController = require('./userController/UserController.js');
 
-const apiController = require('./controllers/apiController.js')
+const mongoose = require('mongoose');
+
+const apiController = require('./controllers/apiController.js');
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const mongoURI = 'mongodb+srv://josuerole:Josue5573@ronalgarcia.nskkhq5.mongodb.net/?retryWrites=true&w=majority&appName=RonalGarcia'
+mongoose.connect(mongoURI);                              
+
+const userRouter = express.Router();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.use('/user', userRouter );
+userRouter.post('/signUp', UserController.createUser);
+userRouter.post('/signIn', UserController.verifyUser, UserController.loggedIn);
+// userRouter.post('/', UserController.createUser);
+
+app.get('/getuserfavorites', UserController.getFavorites, (res, req) => {
+  res.status(200).json(res.body.favorites);
+});
+
+app.post('/addUserFavorite', UserController.addFavorites, (res, req) => {
+  console.log('data saved');
+  res.status(200);
+});
 
 
 // Serve static files from the 'dist' directory
@@ -27,12 +53,19 @@ app.get("/", (req, res) => {
 
 app.get('/api/search/:cuisine/:distance/:budget/:latitude/:longitude', apiController.formatRequestData, (req, res) => {
   const {restaurantData} = res.locals
+  console.log(restaurantData)
   return res.status(200).json(restaurantData);
 });
 
-app.use('*', (req,res) => {
-  res.status(404).send('Not Found');
-});
+//added so that routes would work
+app.get('*', (req, res) => {
+  console.log('Request for index.html recieved');
+  res.sendFile(path.join(__dirname, "..", "client", "dist", "index.html"))
+})
+
+// app.use('*', (req,res) => {
+//   res.status(404).send('Not Found');
+// });
 
 app.use((err, req, res, next) => {
   const defaultObj = {
@@ -49,3 +82,9 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+
+module.exports = app;
+
+
