@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const config = {
+  mode: "development",
   entry: "./client/src/index.jsx",
   output: {
     filename: "bundle.js",
@@ -14,7 +15,7 @@ const config = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ["@babel/preset-env" , "@babel/preset-react"],
           },
         },
         exclude: /node_modules/,
@@ -44,8 +45,6 @@ const config = {
   ],
 };
 
-// nextui({
-//   addCommonColors: true,
-// }),
+
 
 module.exports = config;
