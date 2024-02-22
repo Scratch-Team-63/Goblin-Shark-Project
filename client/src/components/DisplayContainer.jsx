@@ -59,6 +59,7 @@ export default function DisplayContainer({ fetchedData }) {
           key={index}
           isPressable
           onPress={() => console.log("item pressed")}
+          style={{ backgroundColor: item.is_open ? 'green' : 'red'}}
         >
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start items-center justify-center">
             <b className="font-bold text-large">{item.name}</b>
@@ -107,6 +108,7 @@ export default function DisplayContainer({ fetchedData }) {
               alt={item.name}
               className="w-full object-cover h-[140px] restaurantImage"
               src={item.logo_photos[0]}
+              // onError={(event) => {event.target.remove()}}
             />
           </CardBody>
           <Divider />
@@ -123,7 +125,11 @@ export default function DisplayContainer({ fetchedData }) {
               {", "}
 
               {item.miles.toFixed(2)}
-              {" mi away, "}Is open: {item.is_open ? "Yes" : "No"}
+              <div>{" mi away, "}</div>
+              {/* Apply inline styling conditionally based on item.is_open */}
+              <div>
+                Is open: {item.is_open ? "Yes" : "No"}
+              </div>
             </p>
           </CardFooter>
         </Card>
