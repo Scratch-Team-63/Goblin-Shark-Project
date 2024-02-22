@@ -46,7 +46,7 @@ UserController.verifyUser = async (req, res, next) => {
 
 UserController.loggedIn = async (req, res, next) => {
   const SSID = req.cookies["SSID"];
-  console.log('SSID', SSID)
+
   try{
     const user = await User.findById(SSID);
     if(!user) res.redirect('/signUp');
