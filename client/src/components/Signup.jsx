@@ -14,7 +14,7 @@ function Signup() {
     if(!username) setUsernameEmpty(true);
     if(!password) setPasswordEmpty(true);
     if(!isUsernameEmpty && !isPasswordEmpty){
-      fetch('http://localhost:3000/signUp', {
+      fetch('http://localhost:3000/user/signUp', {
         method:'POST',
         headers: {
           'Content-Type':'Application/JSON'

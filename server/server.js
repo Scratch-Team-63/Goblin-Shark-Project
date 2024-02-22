@@ -1,11 +1,12 @@
 const express = require("express");
 const axios = require("axios");
 const path = require("path");
-const UserController = require('./UserController/UserController.js')
+const cookieParser = require('cookie-parser');
+const UserController = require('./UserController/UserController.js');
 
 const mongoose = require('mongoose');
 
-const apiController = require('./controllers/apiController.js')
+const apiController = require('./controllers/apiController.js');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -18,9 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/user', userRouter );
-userRouter.post('/', UserController.createUser);
-userRouter.get('/:username', UserController.verifyUser);
-userRouter.delete('/:username', UserController.deleteUser);
+userRouter.post('/signUp', UserController.createUser);
+userRouter.post('/signIn', UserController.verifyUser, UserController.loggedIn);
+// userRouter.post('/', UserController.createUser);
 // Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, "client", "dist")));
 

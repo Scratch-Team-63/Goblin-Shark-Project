@@ -23,13 +23,18 @@ UserController.createUser = async (req, res, next) => {
     }
 }
 
-UserController.verifyUser = async(req, res, nex) => {
+UserController.verifyUser = async(req, res, next) => {
     try{
-        const {username, password} = req.params;
+        const {username, password} = req.body;
         const user = await User.findOne({username: username});
-        if(!user) return res.status(404).json({error: 'User not in databse'});
+        res.cookie("SSID", user._id, { httpOnly: true });
+        if(!user) return res.status(404).json({error: 'User not in database'});
+        else if(user.password !== password) {
+            res.status(404).json({error: 'User password is incorrect'})
+        }
         else{
-            return res.status(200).json({something: 'do something'})
+            // Return the username in the response
+            return res.status(200).json({username: username});
         }
     } catch (err){
         return next({
@@ -55,5 +60,21 @@ UserController.deleteUser = async(req, res, next) => {
             message: {error: 'Operation Failed'}
         })
     }
+}
+
+UserController.loggedIn = async (req, res, next) => {
+  const SSID = req.cookies["SSID"];
+  try{
+    const user = await User.findById(SSID);
+    if(!user) res.redirect('/signUp');
+    else return next();
+  } catch(err){
+    return next({
+        log: "User  Not Logged in",
+        status: 500,
+        message: { err: "An error occured in the loggedIn function" },
+      });
+  }
+
 }
 module.exports = UserController;

@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Box, Button, Flex, FormControl, FormLabel, Input, VStack, Text } from "@chakra-ui/react";
 
@@ -19,28 +19,26 @@ const Login = () => {
     if(!username) setUsernameEmpty(true);
     if(!password) setPasswordEmpty(true);
     if(!isUsernameEmpty && !isPasswordEmpty){
- fetch(BACKEND_URL + '/signIn', {
+ fetch(BACKEND_URL + '/user/signIn', {
   method:'POST',
   headers: {
     'Content-Type' : 'application/json',
   },
   body: JSON.stringify({username, password}),
  })
-
  .then(res => res.json())
  .then(data => {
-  console.log(data);
   if(data.username){
-    navigate('/')
+    navigate('/main')
   }
  })
  .catch(err => console.log('Login fetch /sigin: Error:', err));
     }
   };
-  const handleSignUp = event => {
-    event.preventDefault();
-    navigate('/signup')
-  };
+  // const handleSignUp = event => {
+  //   event.preventDefault();
+  //   navigate('/signup')
+  // };
 
   return (
     <Flex minHeight="100vh" alignItems="center" justifyContent="center">
