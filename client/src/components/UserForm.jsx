@@ -60,7 +60,7 @@ export default function UserForm ( { hitSearch, loadingState, setLoadingState, s
 
   return (
     <div className="userFormContainer">
-      <DropDown className="userFormItem" color="secondary" setCuisine={setCuisine} cuisine={cuisine}/>
+      <DropDown className="userFormItem" color="primary" setCuisine={setCuisine} cuisine={cuisine}/>
       <Input className="userFormItem" color={isInvalidDistance && "danger"} errorMessage={isInvalidDistance && "Please enter a valid distance (<20 mi)"} endContent="mi" onChange={(e) => setDistance(e.target.value)} style={{ border: 'none'}} size="md" label={<span style={{ color: 'black' }}>How close does it need to be?</span>} labelPlacement="outside" placeholder="distance (in miles)"/>
       {/* add maximum distance */}
       <Input className="userFormItem" color={isInvalidBudget && "danger"} errorMessage={isInvalidBudget && "Please enter a valid dollar value"} startContent="$" onChange={(e) => setBudget(e.target.value)} style={{ border: 'none'}} size="md" label={<span style={{ color: 'black' }}>How much are you tryna spend?</span>} labelPlacement="outside" placeholder="budget (in USD)"/>
