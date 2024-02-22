@@ -1,17 +1,16 @@
-import React from 'react';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import React from 'react';
+// import { useNavigate } from 'react-router-dom';
 
-export default function Register() {
-    const navigate = useNavigate();
+// export default function Register() {
+//     const navigate = useNavigate();
 
-    // helper functions
+//     // helper functions
 
-    // render to page
-    return (
-        <form>
-            <input type="text" placeholder="username"/>
-            <input type="password" placeholder="password"/>
-        </form>
-    );
-};
+//     // render to page
+//     return (
+//         <form>
+//             <input type="text" placeholder="username"/>
+//             <input type="password" placeholder="password"/>
+//         </form>
+//     );
+// };
