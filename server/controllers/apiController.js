@@ -2,13 +2,14 @@ const express = require('express');
 const apiController = {}
 const axios = require('axios');
 
-const APIKey = '1e971a009f6e4ab1bd6aa263960bd053'
+// const APIKey = '1e971a009f6e4ab1bd6aa263960bd053'
+const APIKey = 'defaa8ca6e284a7a8f4ab022633fd8f5'
 
 apiController.formatRequestData = async (req, res, next) => {
   const {cuisine, budget, distance, latitude, longitude} = req.params
   // console.log(cuisine, budget, distance, latitude, longitude);
   try{
-    if (!cuisine || !budget || !distance || !latitude || !longitude) {
+    if (!cuisine || !budget || !distance || isNaN(latitude) || isNaN(longitude) ) {
       return next({
         log:'Express error handler caught apiController.formatRequestData middleware error',
         status: 500,
