@@ -27,17 +27,17 @@ export default function DisplayContainer({ fetchedData }) {
     new Array(fetchedData.length).fill(false)
   );
 
-// const saveFavorites = (/*{array of favorite cards from the backend*/}, event) => {
-  setClickedfavs(prev => {
-    if (prev.includes(/*array of favorite cards*/)) {
-      // If the fav is already in the array, remove it
-      return prev.filter(favoriteCard => favoriteCard  !== /*array of favorite cards*/);
-    } else {
-      // If the favoriteCard is not in the array, add it
-      return [...prev, /*array of favorite cards*/];
-    }
-  });
-z
+// // const saveFavorites = (/*{array of favorite cards from the backend*/}, event) => {
+//   setClickedfavs(prev => {
+//     if (prev.includes(/*array of favorite cards*/)) {
+//       // If the fav is already in the array, remove it
+//       return prev.filter(favoriteCard => favoriteCard  !== /*array of favorite cards*/);
+//     } else {
+//       // If the favoriteCard is not in the array, add it
+//       return [...prev, /*array of favorite cards*/];
+//     }
+//   });
+
 
   // Function to flip the card at a specific index
   const flipCard = (index) => {
@@ -51,38 +51,31 @@ z
   };
 
 
-
-
-
-
-
-
-
   //add functition to populate favorite
 
 
   function AddFavorite() {
     const [favoriteData, setFavoriteData] = useState({
-      name: "",
-      local_hours: {operational: {}},
-      phone_number: "",
-      logo_photos: [],
-      weighted_rating_value: "",
-      address: {
-        city: "",
-        country: "",
-        lat: "",
-        latitude: "",
-        lon: "",
-        longitude: "",
-        state: "",
-        street_addr: "",
-        street_addr_2: "",
-        zipcode: ""
+        name: "",
+        local_hours: { operational: {} },
+        phone_number: "",
+        logo_photos: [],
+        weighted_rating_value: "",
+        address: {
+            city: "",
+            country: "",
+            lat: "",
+            latitude: "",
+            lon: "",
+            longitude: "",
+            state: "",
+            street_addr: "",
+            street_addr_2: "",
+            zipcode: ""
         },
-    miles: "",
-    is_open: true,
-    cuisines: (4) [],
+        miles: "",
+        is_open: true,
+        cuisines: [],
     });
 
 
@@ -106,6 +99,8 @@ z
 
   //when favorite is clicked, the object that was clicked is added to userFavorites
   const handleFavoriteClick = async (item) => {
+
+    console.log('HandleFavoriteClick called')
     try {
       // Make a POST request to add the clicked item to userFavorites
       await axios.post("/addUserFavorite", item);
@@ -114,7 +109,6 @@ z
       console.error("Error adding user favorite:", error);
     }
   };
-
 
 
 
@@ -227,5 +221,4 @@ z
    
   );
 }
-
-//hello world
+}
