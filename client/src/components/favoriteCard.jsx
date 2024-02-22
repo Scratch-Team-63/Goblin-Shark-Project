@@ -18,11 +18,11 @@ import {
 
 
 
-export default function FavoriteCard({item, index}) {
+export default function FavoriteCard({favoritesArray}) {
     const [checked, setChecked] = useState(true);
 
     const card = [{
-        name: "El Pollo Loco",
+        name: "McDonalds",
         local_hours: {operational: {
             Friday: "10:00AM - 08:30PM",
             Monday: "10:00AM - 08:30PM",

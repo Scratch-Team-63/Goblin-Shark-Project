@@ -57,4 +57,27 @@ UserController.deleteUser = async(req, res, next) => {
         })
     }
 }
+
+UserController.getFavorites = async(req, res, next) => {
+    //mongoose find method to pull all objects from favorites
+    try{
+        const userFavorites = await User.find({});
+        if(!userFavorites) return res.status(404).json({error: 'Nothing saved in favorites'});
+        else{
+            res.locals.favoriteArray = userFavorites;
+            return next();
+        }
+    } catch (err){
+        return next({
+            log: 'An Error occurred in the UserController.getFavorites',
+            status: 500,
+            message: {err: 'An error occured'},
+        })
+    }
+}
+
+UserController.addFavorites = async(req, res, next) => {
+    // mogoose
+}
+
 module.exports = UserController;
