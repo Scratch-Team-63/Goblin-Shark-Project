@@ -46,6 +46,7 @@ UserController.verifyUser = async (req, res, next) => {
 
 UserController.loggedIn = async (req, res, next) => {
   const SSID = req.cookies["SSID"];
+  console.log('SSID', SSID)
   try{
     const user = await User.findById(SSID);
     if(!user) res.redirect('/signUp');
@@ -79,6 +80,8 @@ UserController.deleteUser = async (req, res, next) => {
 
 UserController.getFavorites = async (req, res, next) => {
   //mongoose find method to pull all objects from favorites
+  console.log('req.cookies', req.cookies['SSID'])
+  console.log('req.cookies.SSID', req.cookies.SSID)
 
   const userId = req.cookies.SSID;
   try {
@@ -101,21 +104,29 @@ UserController.getFavorites = async (req, res, next) => {
 
 UserController.addFavorites = async (req, res, next) => {
   const userId = req.cookies.SSID;
+  // const { userId, itemID } = req.body  // thiss is what is passed in the req body from our post request on the front end
+  console.log('req.body',req.body);
+  console.log('userId', userId)
   try {
     const userFavorites = await User.findById(userId);
     if (!userFavorites)
       return res.status(404).json({ error: "Nothing saved in favorites" });
     else {
-      const {} = req.body;
 
-      const newFavorite = {};
+      
+      // const {} = req.body; // dont need this here i think
 
+      const newFavorite = req.body;
+      // need conditional first to make sure userFavorites.favorites doesnt already include itemId
       userFavorites.favorites.push(newFavorite);
-
       console.log("Added favorite", userFavorites.favorites);
+      // then save userFavorites.favorites
       await userFavorites.save();
-
+      
+      //  return res.status(ok).etc or invoke next handler and take care of status message in route handler
       return next();
+      // if userFavorites.favorites already has item in array
+        // res.status(400) and message displaying that item already exists in the array
     }
   } catch (err) {
     return next({

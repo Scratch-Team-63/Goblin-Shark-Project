@@ -19,7 +19,7 @@ const Login = () => {
     if(!username) setUsernameEmpty(true);
     if(!password) setPasswordEmpty(true);
     if(!isUsernameEmpty && !isPasswordEmpty){
- fetch(BACKEND_URL + '/user/signIn', {
+ fetch(BACKEND_URL + '/', {
   method:'POST',
   headers: {
     'Content-Type' : 'application/json',
@@ -47,11 +47,11 @@ const Login = () => {
           <form onSubmit={handleLogin}>
             <FormControl id="username">
               <FormLabel fontSize="lg">Username</FormLabel>
-              <Input fontSize="lg" type="text" value={username} onChange={e => setUsername(e.target.value)} />
+              <Input fontSize="lg" type="text" value={username} onChange={e => setUsername(e.target.value)} width="full" border="1px solid" borderColor="gray.500" />
             </FormControl>
             <FormControl id="password">
               <FormLabel fontSize="lg">Password</FormLabel>
-              <Input fontSize="lg" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+              <Input fontSize="lg" type="password" value={password} onChange={e => setPassword(e.target.value)} width="full" border="1px solid" borderColor="gray.500"/>
             </FormControl>
             <Button colorScheme="teal" type="submit" width="full">Log in</Button>
           </form>

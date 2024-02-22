@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import { Box, Flex, FormLabel, Input, Button } from "@chakra-ui/react";
 
 function Signup() {
   const [username, setUsername] = useState('');
@@ -14,7 +14,7 @@ function Signup() {
     if(!username) setUsernameEmpty(true);
     if(!password) setPasswordEmpty(true);
     if(!isUsernameEmpty && !isPasswordEmpty){
-      fetch('http://localhost:3000/user/signUp', {
+      fetch('http://localhost:3000/signUp', {
         method:'POST',
         headers: {
           'Content-Type':'Application/JSON'
@@ -31,19 +31,21 @@ function Signup() {
   };
 
   return (
-    <Box as="form" onSubmit={handleSignUp} p={5} shadow="md" borderWidth="1px">
-      <FormControl id="username" isRequired>
-        <FormLabel>Username</FormLabel>
-        <Input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </FormControl>
-      <FormControl id="password" isRequired mt={6}>
-        <FormLabel>Password</FormLabel>
-        <Input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </FormControl>
-      <Button colorScheme="blue" type="submit" value="Create User" mt={6}>
-        Create User
-      </Button>
-    </Box>
+    <Flex width="full" height="100vh" align="center" justifyContent="center">
+      <Box as="form" onSubmit={handleSignUp} p={5} shadow="md" borderWidth="1px" width="full" maxW="500px">
+        <FormControl id="username" isRequired>
+          <FormLabel fontSize="lg">Username</FormLabel>
+          <Input fontSize="lg" type="text" value={username} onChange={e => setUsername(e.target.value)} width="full" border="1px solid" borderColor="gray.500" />
+        </FormControl>
+        <FormControl id="password" isRequired mt={6}>
+          <FormLabel fontSize="lg">Password</FormLabel>
+          <Input fontSize="lg" type="password" value={password} onChange={e => setPassword(e.target.value)} width="full" border="1px solid" borderColor="gray.500" />
+        </FormControl>
+        <Button colorScheme="blue" type="submit" value="Create User" mt={6}>
+          Create User
+        </Button>
+      </Box>
+    </Flex>
   );
 }
 
