@@ -3,14 +3,14 @@ const axios = require("axios");
 const path = require("path");
 const UserController = require('./UserController/UserController.js')
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 const apiController = require('./controllers/apiController.js')
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const mongoURI = 'mongodb+srv://josuerole:Josue5573@ronalgarcia.nskkhq5.mongodb.net/?retryWrites=true&w=majority&appName=RonalGarcia'
-mongoose.connect(mongoURI);                              
+// const mongoURI = 'mongodb+srv://josuerole:Josue5573@ronalgarcia.nskkhq5.mongodb.net/?retryWrites=true&w=majority&appName=RonalGarcia'
+// mongoose.connect(mongoURI);                              
 
 const userRouter = express.Router();
 app.use(express.json());

@@ -1,67 +1,61 @@
-import React from "react";
-import { useState } from "react";
-import FavoriteCard from './favoriteCard.jsx';
-
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Image,
-  Divider,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  Button,
-  Checkbox
-} from "@nextui-org/react";
+import React, { useState } from 'react'
 import { HeartIcon } from "../HeartIcon.jsx";
 
+import {
+    Card,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    Image,
+    Divider,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    Button,
+    Checkbox
+  } from "@nextui-org/react";
+  
 
-export default function DisplayContainer({ fetchedData }) {
-  const [checked, setChecked] = useState(false);
-  const [isFlippedArray, setIsFlippedArray] = useState(
-    new Array(fetchedData.length).fill(false)
-  );
 
-  const [favorites, setFavorites] = useState([]); 
 
-  // setClickedStates(prev => {
-  //   if (prev.includes(/*array of favorite cards*/)) {
-  //     // If the state is already in the array, remove it
-  //     return prev.filter(state => state !== /*array of favorite cards*/);
-  //   } else {
-  //     // If the state is not in the array, add it
-  //     return [...prev, /*array of favorite cards*/];
-  //   }
-  // });
+export default function FavoriteCard({item, index}) {
+    const [checked, setChecked] = useState(true);
 
-  // Function to flip the card at a specific index
-  const flipCard = (index) => {
-    console.log('FlipCard is called')
-    setIsFlippedArray((prevState) => {
-      const newState = [...prevState];
-      newState[index] = !newState[index];
-      console.log('New State', newState)
-      return newState;
-    });
-  };
-
-  //add functition to populate favorite
+    const card = [{
+        name: "El Pollo Loco",
+        local_hours: {operational: {
+            Friday: "10:00AM - 08:30PM",
+            Monday: "10:00AM - 08:30PM",
+            Saturday: "10:00AM - 08:30PM",
+            Sunday: "10:00AM - 08:30PM",
+            Thursday: "10:00AM - 08:30PM",
+            Tuesday: "10:00AM - 08:30PM",
+            Wednesday: "10:00AM - 08:30PM"
+            }},
+        phone_number: 14089846860,
+        logo_photos: [],
+        weighted_rating_value: 4.9,
+        address: {
+            city: "San Jose",
+            country: "US",
+            lat: 37.3019127,
+            latitude: 37.3019127,
+            lon: -121.9503659,
+            longitude: -121.9503646,
+            state: "CA",
+            street_addr: "1229 South Winchester Boulevard",
+            street_addr_2: "",
+            zipcode: "95128"
+            },
+        miles: 0.19795308583349666,
+        is_open: true,
+        cuisines: (4) ['Comfort Food', 'Latin American', 'Mexican', 'New American'],
+    }];
 
   return (
-    <>
-    {/* favorites container */}
-     <div id='favCon' className="gap-2 grid grid-cols-2 sm:grid-cols-4 displayContainer"> 
-      <FavoriteCard />
-     </div>
-
-     
-     <div className="gap-2 grid grid-cols-2 sm:grid-cols-4 displayContainer">
-      {fetchedData.map((item, index) => (
+    <div >
+      {card.map((item, index) => (
         <div
-          className={`card ${isFlippedArray[index] ? "is-flipped" : ""}`}
-          onClick={() => flipCard(index)}
           key={index}
         >
           {/* <div className="front"> */}
@@ -151,11 +145,7 @@ export default function DisplayContainer({ fetchedData }) {
         <div className="back">
         </div>
         </div>
-      ))}
-    </div>
-    </>
-   
-  );
+      ))}      
+  </div>
+  )
 }
-
-//hello world
