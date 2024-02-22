@@ -1,11 +1,12 @@
-import React from 'react';
-import React from 'react';
+import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Register() {
+export default function Login(){
+
     const navigate = useNavigate();
 
     // helper functions
+
 
     // render to page
     return (
