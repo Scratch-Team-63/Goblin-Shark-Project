@@ -22,7 +22,8 @@ app.use(cookieParser());
 //this route is used for calling info about the 
 // app.use('/user', userRouter );
 
-app.post('/signUp', UserController.createUser);
+
+app.post('/signUp', UserController.createUser, UserController.loggedIn);
 app.post('/', UserController.verifyUser, UserController.loggedIn);
 
 // userRouter.post('/signUp', UserController.createUser);

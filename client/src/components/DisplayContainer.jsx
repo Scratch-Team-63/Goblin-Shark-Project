@@ -108,8 +108,8 @@ export default function DisplayContainer({ fetchedData }) {
   return (
     <>
     {/* favorites container */}
-     <div id='favCon' className="gap-2 grid grid-cols-2 sm:grid-cols-4 displayContainer"> 
-      <FavoriteCard favoritesArray={userFavorites}/>
+     <div id='favCon' > 
+      <FavoriteCard favoritesArray={userFavorites} setChecked={setChecked} checked={checked}/>
      </div>
 
      {/* results container */}

@@ -1,6 +1,6 @@
 import React from "react";
 export const HeartIcon = ({
-  filled = false,
+  filled = true,
   size,
   height,
   width,

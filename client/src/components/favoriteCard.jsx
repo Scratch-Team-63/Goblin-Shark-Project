@@ -18,8 +18,8 @@ import {
 
 
 
-export default function FavoriteCard({favoritesArray}) {
-    const [checked, setChecked] = useState(true);
+export default function FavoriteCard({favoritesArray, setChecked, checked}) {
+    setChecked(true);
     console.log('favoritesArray', favoritesArray)
 
     // const card = [{
@@ -54,7 +54,7 @@ export default function FavoriteCard({favoritesArray}) {
     // }];
 
   return (
-    <div >
+    <div className="gap-2 grid grid-cols-2 sm:grid-cols-4 displayContainer">
       {favoritesArray.map((item, index) => (
         <div
           key={index}
@@ -72,6 +72,7 @@ export default function FavoriteCard({favoritesArray}) {
             <CardHeader className="pb-0 pt-2 px-4 flex-col items-start items-center justify-center">
             <div className="flex items-center">
               <Checkbox
+                defaultSelected
                 checked={checked}
                 onChange={setChecked}
                 description={checked ? 'Unfavorite' : 'Favorite'}
