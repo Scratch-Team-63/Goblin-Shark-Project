@@ -21,6 +21,17 @@ app.use('/user', userRouter );
 userRouter.post('/signUp', UserController.createUser);
 userRouter.post('/signIn', UserController.verifyUser);
 // userRouter.post('/', UserController.createUser);
+
+app.get('/getuserfavorites', UserController.getFavorites, (res, req) => {
+  res.status(200).json(res.body.favorites);
+});
+
+app.post('/addUserFavorite', UserController.addFavorites, (res, req) => {
+  console.log('data saved');
+  res.status(200);
+});
+
+
 // Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, "client", "dist")));
 
