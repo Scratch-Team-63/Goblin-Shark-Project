@@ -1,12 +1,29 @@
 const express = require("express");
 const axios = require("axios");
 const path = require("path");
+const mongoose = require("mongoose")
+// const bodyParser = require('body-parser');
 
 const apiController = require('./controllers/apiController.js')
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-//stretch goal to add map
+const MONGO_URI = 'mongodb+srv://foodForager:9j78rgBbZ8nh7vTK@foodforager.ip0lgrq.mongodb.net/'
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connection.once('open', () => {
+  console.log('Connected to Database');
+});
+
+
+
+app.use(express.json());
+app.use(express.urlencoded());
+// Parse URL-encoded bodies (e.g., form data)
+// app.use(bodyParser.urlencoded({ extended: true }));
+
+// Parse JSON bodies
+// app.use(bodyParser.json());
+
 
 // Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, "client", "dist")));
@@ -20,6 +37,13 @@ app.get("/bundle.js", (req, res) => {
   console.log("Request for bundle.js received");
   res.sendFile(path.join(__dirname, "..", "client", "dist", "bundle.js"), {});
 });
+
+
+
+const loginRouter = require('./routes/login.js');
+const signupRouter = require('./routes/signup.js');
+app.use('/login', loginRouter);
+app.use('/signup', signupRouter);
 
 app.get("/", (req, res) => {
   console.log("Request for INDEX.HTML received");

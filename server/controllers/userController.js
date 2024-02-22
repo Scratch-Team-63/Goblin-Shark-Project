@@ -10,10 +10,10 @@ const userController = {};
 userController.createUser = async (req, res, next) => {
   console.log('in beginning of userController.createUser, req.body is ', req.body);
 
-  let { firstName, lastName, username, password } = req.body;
+  const { firstName, lastName, username, password } = req.body;
 
   // error handler
-  if (!firstName || !lastName || !username || !password) {
+  if (!firstName || !lastName || !username || !password || !password.match(regex)) {
     return next({
         log: 'missing user registration parameters',
         message: {err: 'Error occurred in userController.createUser.'},
@@ -34,10 +34,10 @@ userController.createUser = async (req, res, next) => {
     }
 
     //User schema will salt pw
-    const userData = await User.create ({ firstName, lastName, username, password });
-
-    res.locals.userData = userData;
-    console.log('res.local.userData is ', res.local.userData);
+    const userData = await User.create ({ firstName: firstName, lastName: lastName, username: username, password: password });
+    console.log('userData: ', userData)
+    res.locals.userData = userData.id;
+    // console.log('res.locals.userData is ', res.locals.userData);
 
     return next();
 
@@ -79,8 +79,8 @@ userController.verifyUser = async (req, res, next) => {
 
       if (!result) return res.redirect('/register');
       else {
-        res.locals.userInfo = user;
-        console.long('res.locals.userInfo is ', res.locals.userInfo)
+        res.locals.userInfo = user.id;
+        console.log('res.locals.userInfo is ', res.locals.userInfo)
 
         return next();
       }
