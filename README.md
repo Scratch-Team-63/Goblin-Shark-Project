@@ -14,3 +14,14 @@ dquote>
 > Co-author-by: Stan <liger07@gmail.com>
 > Co-author-by: Alex <alexanderjosephdavid@gmail.com>
 > Co-author-by: Ricky <Roderickx.deleon@gmail.com>"
+
+
+
+
+git commit -m "julesdmai 02/22/2024 jules/frontend Implemented front-end to back-end user signup
+dquote>
+dquote>
+> Co-author-by: Jules <julesdmai@gmail.com>
+> Co-author-by: Stan <liger07@gmail.com>
+> Co-author-by: Alex <alexanderjosephdavid@gmail.com>
+> Co-author-by: Ricky <Roderickx.deleon@gmail.com>"
