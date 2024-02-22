@@ -50,9 +50,6 @@ userController.createUser = async (req, res, next) => {
 }
 }
 
-
-
-
 // Middleware to verify User for Login
 userController.verifyUser = async (req, res, next) => {
     console.log('in beginning of userController.verifyUser, req.body is ', req.body);
@@ -60,7 +57,7 @@ userController.verifyUser = async (req, res, next) => {
     const { username, password } = req.body;
 
        //input error check aka: save money $$$
-      if (!username || !password ) {
+       if (!username || !password || !password.match(regex)) {
         return next({
             log: 'missing user login parameters',
             message: {err: 'Error occurred in userController.verifyUser.'},

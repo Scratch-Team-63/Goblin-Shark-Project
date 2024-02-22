@@ -55,6 +55,14 @@ app.get('/api/search/:cuisine/:distance/:budget/:latitude/:longitude', apiContro
   return res.status(200).json(restaurantData);
 });
 
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "client", "dist", "index.html"));
+});
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "client", "dist", "index.html"));
+});
+
 app.use('*', (req,res) => {
   res.status(404).send('Not Found');
 });
