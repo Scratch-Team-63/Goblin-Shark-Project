@@ -52,6 +52,9 @@ app.use((err, req, res, next) => {
   const errObj = Object.assign({}, defaultObj, err);
   console.log(errObj.log);
   return res.status(errObj.status).json(errObj.message);
+
+  // expect().toHaveProperty('err')
+  // response.body = {err: 'An error occurred'}
 });
 
 
