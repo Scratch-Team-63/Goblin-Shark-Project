@@ -1,7 +1,8 @@
 const express = require("express");
 const axios = require("axios");
 const path = require("path");
-const UserController = require('./UserController/UserController.js')
+const cookieParser = require('cookie-parser');
+const UserController = require('./userController/UserController.js')
 
 const mongoose = require('mongoose');
 
@@ -19,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/user', userRouter );
 userRouter.post('/signUp', UserController.createUser);
-userRouter.post('/signIn', UserController.verifyUser);
+userRouter.post('/signIn', UserController.verifyUser, UserController.loggedIn);
 // userRouter.post('/', UserController.createUser);
 
 app.get('/getuserfavorites', UserController.getFavorites, (res, req) => {

@@ -26,9 +26,13 @@ UserController.verifyUser = async (req, res, next) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username: username });
+
     if (!user) return res.status(404).json({ error: "User not in database" });
-    else {
+    else if(user.password !== password){
+      res.status(404).json({error: 'User password is incorrect'})
+     }else {
       // Return the username in the response
+      res.cookie("SSID", user._id, { httpOnly: true });
       return res.status(200).json({ username: user.username });
     }
   } catch (err) {
@@ -39,6 +43,22 @@ UserController.verifyUser = async (req, res, next) => {
     });
   }
 };
+
+UserController.loggedIn = async (req, res, next) => {
+  const SSID = req.cookies["SSID"];
+  try{
+    const user = await User.findById(SSID);
+    if(!user) res.redirect('/signUp');
+    else return next();
+  } catch(err){
+    return next({
+        log: "User  Not Logged in",
+        status: 500,
+        message: { err: "An error occured in the loggedIn function" },
+      });
+  }
+
+}
 
 UserController.deleteUser = async (req, res, next) => {
   const { username } = req.params;
