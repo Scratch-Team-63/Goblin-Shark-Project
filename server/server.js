@@ -6,6 +6,7 @@ const apiController = require('./controllers/apiController.js')
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+//stretch goal to add map
 
 // Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, "client", "dist")));
@@ -28,6 +29,14 @@ app.get("/", (req, res) => {
 app.get('/api/search/:cuisine/:distance/:budget/:latitude/:longitude', apiController.formatRequestData, (req, res) => {
   const {restaurantData} = res.locals
   return res.status(200).json(restaurantData);
+});
+
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "client", "dist", "index.html"));
+});
+
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "client", "dist", "index.html"));
 });
 
 app.use('*', (req,res) => {
