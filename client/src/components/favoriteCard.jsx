@@ -20,41 +20,42 @@ import {
 
 export default function FavoriteCard({favoritesArray}) {
     const [checked, setChecked] = useState(true);
+    console.log('favoritesArray', favoritesArray)
 
-    const card = [{
-        name: "McDonalds",
-        local_hours: {operational: {
-            Friday: "10:00AM - 08:30PM",
-            Monday: "10:00AM - 08:30PM",
-            Saturday: "10:00AM - 08:30PM",
-            Sunday: "10:00AM - 08:30PM",
-            Thursday: "10:00AM - 08:30PM",
-            Tuesday: "10:00AM - 08:30PM",
-            Wednesday: "10:00AM - 08:30PM"
-            }},
-        phone_number: 14089846860,
-        logo_photos: [],
-        weighted_rating_value: 4.9,
-        address: {
-            city: "San Jose",
-            country: "US",
-            lat: 37.3019127,
-            latitude: 37.3019127,
-            lon: -121.9503659,
-            longitude: -121.9503646,
-            state: "CA",
-            street_addr: "1229 South Winchester Boulevard",
-            street_addr_2: "",
-            zipcode: "95128"
-            },
-        miles: 0.19795308583349666,
-        is_open: true,
-        cuisines: (4) ['Comfort Food', 'Latin American', 'Mexican', 'New American'],
-    }];
+    // const card = [{
+    //     name: "McDonalds",
+    //     local_hours: {operational: {
+    //         Friday: "10:00AM - 08:30PM",
+    //         Monday: "10:00AM - 08:30PM",
+    //         Saturday: "10:00AM - 08:30PM",
+    //         Sunday: "10:00AM - 08:30PM",
+    //         Thursday: "10:00AM - 08:30PM",
+    //         Tuesday: "10:00AM - 08:30PM",
+    //         Wednesday: "10:00AM - 08:30PM"
+    //         }},
+    //     phone_number: 14089846860,
+    //     logo_photos: [],
+    //     weighted_rating_value: 4.9,
+    //     address: {
+    //         city: "San Jose",
+    //         country: "US",
+    //         lat: 37.3019127,
+    //         latitude: 37.3019127,
+    //         lon: -121.9503659,
+    //         longitude: -121.9503646,
+    //         state: "CA",
+    //         street_addr: "1229 South Winchester Boulevard",
+    //         street_addr_2: "",
+    //         zipcode: "95128"
+    //         },
+    //     miles: 0.19795308583349666,
+    //     is_open: true,
+    //     cuisines: (4) ['Comfort Food', 'Latin American', 'Mexican', 'New American'],
+    // }];
 
   return (
     <div >
-      {card.map((item, index) => (
+      {favoritesArray.map((item, index) => (
         <div
           key={index}
         >
@@ -65,7 +66,6 @@ export default function FavoriteCard({favoritesArray}) {
             key={index}
             isPressable
             onPress={() => {
-              console.log("card Pressed", index);
               flipCard(index);
             }}
           >

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FavoriteCard from './favoriteCard.jsx';
 import axios from "axios";
 
@@ -27,16 +27,6 @@ export default function DisplayContainer({ fetchedData }) {
     new Array(fetchedData.length).fill(false)
   );
 
-// // const saveFavorites = (/*{array of favorite cards from the backend*/}, event) => {
-//   setClickedfavs(prev => {
-//     if (prev.includes(/*array of favorite cards*/)) {
-//       // If the fav is already in the array, remove it
-//       return prev.filter(favoriteCard => favoriteCard  !== /*array of favorite cards*/);
-//     } else {
-//       // If the favoriteCard is not in the array, add it
-//       return [...prev, /*array of favorite cards*/];
-//     }
-//   });
 
 
   // Function to flip the card at a specific index
@@ -77,6 +67,7 @@ export default function DisplayContainer({ fetchedData }) {
         is_open: true,
         cuisines: [],
     });
+  }
 
 
   
@@ -88,6 +79,7 @@ export default function DisplayContainer({ fetchedData }) {
         // Make a GET request to fetch user favorites from the backend
         const response = await axios.get("/getuserfavorites");
         setUserFavorites(response.data); // Update fav with fetched favorites
+        console.log('users data has been fetched');
       } catch (error) {
         console.error("Error fetching user favorites:", error);
       }
@@ -220,5 +212,4 @@ export default function DisplayContainer({ fetchedData }) {
     </>
    
   );
-}
 }

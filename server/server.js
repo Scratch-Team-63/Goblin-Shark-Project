@@ -16,16 +16,22 @@ mongoose.connect(mongoURI);
 const userRouter = express.Router();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 
-app.use('/user', userRouter );
-userRouter.post('/signUp', UserController.createUser);
-userRouter.post('/signIn', UserController.verifyUser, UserController.loggedIn);
+//this route is used for calling info about the 
+// app.use('/user', userRouter );
+
+app.post('/signUp', UserController.createUser);
+app.post('/', UserController.verifyUser, UserController.loggedIn);
+
+// userRouter.post('/signUp', UserController.createUser);
+// userRouter.post('/', UserController.verifyUser, UserController.loggedIn);
 // userRouter.post('/', UserController.createUser);
 
-app.get('/getuserfavorites', UserController.getFavorites, (res, req) => {
+app.get('/getuserfavorites', UserController.getFavorites); /*, (res, req) => {
   res.status(200).json(res.body.favorites);
-});
+});*/
 
 app.post('/addUserFavorite', UserController.addFavorites, (res, req) => {
   console.log('data saved');
@@ -53,7 +59,7 @@ app.get("/", (req, res) => {
 
 app.get('/api/search/:cuisine/:distance/:budget/:latitude/:longitude', apiController.formatRequestData, (req, res) => {
   const {restaurantData} = res.locals
-  console.log(restaurantData)
+  // console.log(restaurantData)
   return res.status(200).json(restaurantData);
 });
 

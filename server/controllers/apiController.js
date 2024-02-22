@@ -9,7 +9,7 @@ apiController.formatRequestData = async (req, res, next) => {
   const {cuisine, budget, distance, latitude, longitude} = req.params
   // console.log(cuisine, budget, distance, latitude, longitude);
   try{
-    if (cuisine !== 'string' || typeof budget !== 'number' || typeof distance !== 'number' || typeof latitude !== 'number' || typeof longitude !== 'number' ) {
+    if (!cuisine || !budget  || !distance || !latitude || !longitude ) {
       console.log('bad request active');
       return next({
         log:'Express error handler caught apiController.formatRequestData middleware error',
@@ -20,7 +20,7 @@ apiController.formatRequestData = async (req, res, next) => {
     const apiResponseData = await axios.get(`https://api.spoonacular.com/food/restaurants/search?cuisine=${cuisine}&budget=${budget}&distance=${distance}&lat=${latitude}&lng=${longitude}&apiKey=${APIKey}`)
 
     //restaurantData will be an array of restaurant objects
-    console.log(apiResponseData)
+    // console.log(apiResponseData)
     res.locals.restaurantData = apiResponseData.data.restaurants
     return next()
 
