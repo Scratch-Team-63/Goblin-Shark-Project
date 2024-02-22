@@ -2,11 +2,11 @@ const express = require("express");
 const axios = require("axios");
 const path = require("path");
 const cookieParser = require('cookie-parser');
-const UserController = require('./userController/UserController.js')
+const UserController = require('./userController/UserController.js');
 
 const mongoose = require('mongoose');
 
-const apiController = require('./controllers/apiController.js')
+const apiController = require('./controllers/apiController.js');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -86,3 +86,5 @@ app.listen(PORT, () => {
 
 
 module.exports = app;
+
+

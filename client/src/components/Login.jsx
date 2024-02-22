@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Box, Button, Flex, FormControl, FormLabel, Input, VStack, Text } from "@chakra-ui/react";
 
@@ -26,10 +26,8 @@ const Login = () => {
   },
   body: JSON.stringify({username, password}),
  })
-
  .then(res => res.json())
  .then(data => {
-  console.log(data);
   if(data.username){
     navigate('/main')
   }
@@ -37,10 +35,10 @@ const Login = () => {
  .catch(err => console.log('Login fetch /sigin: Error:', err));
     }
   };
-  const handleSignUp = event => {
-    event.preventDefault();
-    navigate('/signup')
-  };
+  // const handleSignUp = event => {
+  //   event.preventDefault();
+  //   navigate('/signup')
+  // };
 
   return (
     <Flex minHeight="100vh" alignItems="center" justifyContent="center">
