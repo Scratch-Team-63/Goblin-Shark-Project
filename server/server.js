@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 // const bodyParser = require('body-parser');
 
 const apiController = require('./controllers/apiController.js')
+const cookieController = require('./controllers/cookieController.js')
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -33,7 +34,7 @@ app.get("/output.css", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "client", "src", "output.css"), {});
 });
 
-app.get("/bundle.js", (req, res) => {
+app.get("/bundle.js", cookieController.setCookie, (req, res) => {
   console.log("Request for bundle.js received");
   res.sendFile(path.join(__dirname, "..", "client", "dist", "bundle.js"), {});
 });

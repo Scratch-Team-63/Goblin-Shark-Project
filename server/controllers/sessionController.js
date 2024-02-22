@@ -1,9 +1,9 @@
-const Session = require('../models/sessionModel.js');
+const Session = require('../models/sessionModels.js');
 
 const sessionController = {};
 
 sessionController.startSession = (req, res, next) => {
-  Session.create({ cookieId: res.locals.id }, (err, session) => {
+  Session.create({ cookieId: res.locals.userInfo }, (err, session) => {
     if(err) return next({
         log: 'Error occured in sessionController.startSession',
         message: {err: 'Session could not be started'},

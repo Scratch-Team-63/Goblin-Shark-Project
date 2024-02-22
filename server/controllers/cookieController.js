@@ -7,8 +7,8 @@ cookieController.setCookie = (req, res, next) => {
 }
 
 cookieController.setSSIDCookie = (req, res, next) => {
-    res.cookie('ssid', res.locals.id, {httpOnly: true, secure: true});
+    res.cookie('ssid', res.locals.userInfo, {httpOnly: true, secure: true});
     return next();
 }
 
-module.export = cookieController;
+module.exports = cookieController;
