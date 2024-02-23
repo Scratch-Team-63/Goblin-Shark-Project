@@ -21,10 +21,10 @@
   align-items: center;
   flex-direction: column;
   width: 300px;
-  padding: 16px;
+  padding-top: 16px;
 }
 .userFormItem {
-  margin: 10px;
+  margin: 16px;
 }
 
 .displayContainer {

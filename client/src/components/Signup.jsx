@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigationbar from './Navigationbar.jsx'
 import { Input, Button } from "@nextui-org/react";
@@ -65,6 +65,29 @@ export default function Signup() {
         }
     }
 
+    
+    const [isInvalid, setIsInvalid] = useState(true);
+
+    useEffect(() => {
+        const regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+        if (!formData.password.match(regex) ) {
+            setIsInvalid((prevState) => {
+                return true
+            });
+        }
+        if (formData.password.length === 0) {
+            setIsInvalid(() => {
+                return false;
+            });
+        } 
+        if (formData.password.match(regex) ) {
+            setIsInvalid(() => {
+                return false;
+            });
+        }
+        
+    }, [formData])
+
     // render to page
     return (
         <>
@@ -75,7 +98,7 @@ export default function Signup() {
                 <Input className="userFormItem" type="text" name="firstName" value={formData.firstName} placeholder="Enter your first name" onChange={handleChange} required style={{ border: 'none'}} />
                 <Input className="userFormItem" type="text" name="lastName" value={formData.lastName} placeholder="Enter your last name" onChange={handleChange} required style={{ border: 'none'}}  />
                 <Input className="userFormItem" type="text" name="username" value={formData.username} placeholder="Enter your username" onChange={handleChange} required style={{ border: 'none'}}  />
-                <Input className="userFormItem" type="password" name="password" value={formData.password} placeholder="Enter your password" onChange={handleChange} required  style={{ border: 'none'}} />
+                <Input color={isInvalid && "danger"} style={{ border: 'none'}} errorMessage={isInvalid && "A minimum 8 characters password containing at least one uppercase, one lowercase, one number, and one special character are required."} className="userFormItem" type="password" name="password" value={formData.password} placeholder="Enter your password" onChange={handleChange} required   />
                 <Button type="submit" color="primary" className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg userFormItem" size="md">Sign up</Button>
             </form>
         </div>
