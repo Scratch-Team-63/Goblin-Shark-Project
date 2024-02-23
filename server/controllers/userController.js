@@ -57,7 +57,7 @@ userController.verifyUser = async (req, res, next) => {
     const { username, password } = req.body;
 
        //input error check aka: save money $$$
-       if (!username || !password || !password.match(regex)) {
+       if (!username || !password) {
         return next({
             log: 'missing user login parameters',
             message: {err: 'Error occurred in userController.verifyUser.'},
@@ -71,13 +71,13 @@ userController.verifyUser = async (req, res, next) => {
 
       if (!user) {
         console.log('no such user found');
-        return res.status(203).redirect('/register');
+        return res.status(203).redirect('/signup');
       }
 
       //checks an encrypted password
       const result = await bcrypt.compare(password, user.password);
 
-      if (!result) return res.redirect('/register');
+      if (!result) return res.redirect('/signup');
       else {
         res.locals.userInfo = user.id;
         console.log('res.locals.userInfo is ', res.locals.userInfo)

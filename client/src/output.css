@@ -21,6 +21,7 @@
   align-items: center;
   flex-direction: column;
   width: 300px;
+  padding: 16px;
 }
 .userFormItem {
   margin: 10px;
@@ -70,7 +71,19 @@
 }
 
 
+.signupContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
+.formContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 ::before,
 ::after {

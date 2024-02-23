@@ -6,8 +6,19 @@ export default function Navigationbar() {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault()
     navigate('/signup');
+  }
+
+  const handleClickLogin = (e) => {
+    e.preventDefault()
+    navigate('/login');
+  }
+
+  const handleClickHome = (e) => {
+    e.preventDefault()
+    navigate('/');
   }
 
   return (
@@ -33,12 +44,23 @@ export default function Navigationbar() {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+        <NavbarItem  className="hidden lg:flex">
+          <Link href="">Login</Link>
+        </NavbarItem>
+        
+        <NavbarItem>
+          <Button as={Link} color="primary" href="" variant="flat" onClick={handleClickHome}>
+            Home
+          </Button>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat" onClick={handleClick}>
+          <Button as={Link} color="primary" href="" variant="flat" onClick={handleClick}>
             Sign Up
+          </Button>
+        </NavbarItem>
+        <NavbarItem>
+          <Button as={Link} color="primary" href="" variant="flat" onClick={handleClickLogin}>
+            Login
           </Button>
         </NavbarItem>
       </NavbarContent>

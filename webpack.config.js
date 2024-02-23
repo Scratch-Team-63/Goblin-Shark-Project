@@ -43,6 +43,17 @@ const config = {
       filename: "index.html",
     }),
   ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'client/dist'),
+      publicPath: '/'
+    },
+    hot: true,
+    proxy: [{
+      context: ['/'], // context can be a string or an array of strings to specify multiple paths
+      target: 'http://localhost:3000'
+    }],
+  }
 };
 
 

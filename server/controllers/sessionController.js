@@ -2,15 +2,20 @@ const Session = require('../models/sessionModels.js');
 
 const sessionController = {};
 
-sessionController.startSession = (req, res, next) => {
-  Session.create({ cookieId: res.locals.userInfo }, (err, session) => {
-    if(err) return next({
+sessionController.startSession = async (req, res, next) => {
+  console.log("session controller hit")
+  try {
+    const session = await Session.create({ cookieId: res.locals.userInfo });
+    console.log('session was created')
+    return next();
+  } catch (err) {
+      return next({
         log: 'Error occured in sessionController.startSession',
         message: {err: 'Session could not be started'},
         status: 500
-    });
-    else return next();
-  })
+      });
+  }
+  
 }
 
 sessionController.isLoggedIn = async (req, res, next) => {

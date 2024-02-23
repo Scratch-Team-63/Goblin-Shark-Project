@@ -52,6 +52,8 @@ export default function DisplayContainer({ fetchedData }) {
   return (
     <div className="gap-2 grid grid-cols-2 sm:grid-cols-4 displayContainer">
       {fetchedData.map((item, index) => (
+        item.logo_photos[0] &&
+        
         <Card
           className="restaurant"
           role="ButtonTestContainer"
@@ -116,7 +118,7 @@ export default function DisplayContainer({ fetchedData }) {
             <p>
               <b>★ {Number(item.weighted_rating_value).toFixed(2)} Rating</b>
             </p>
-            <p className="text-default-500">
+            <p style={{color: "black"}} className="text-default-500">
               {item.address.street_addr}
               {", "}
               {item.address.city}
@@ -128,7 +130,7 @@ export default function DisplayContainer({ fetchedData }) {
               <div>{" mi away, "}</div>
               {/* Apply inline styling conditionally based on item.is_open */}
               <div>
-                Is open: {item.is_open ? "Yes" : "No"}
+                Is open: {item.is_open ? <b>"Yes"</b> : <b>"No"</b>}
               </div>
             </p>
           </CardFooter>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navigationbar from './Navigationbar.jsx'
-import { Input } from "@nextui-org/react";
+import { Input, Button } from "@nextui-org/react";
 
 
 export default function Signup() {
@@ -9,14 +9,12 @@ export default function Signup() {
 
     // initialize state
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
         username: '',
         password: '',
     });
 
     // helper functions. use state to store input fields
-    const handleChange = event => {
+    const handleChange = (event) => {
         event.preventDefault();
         
         setFormData({
@@ -42,10 +40,9 @@ export default function Signup() {
 
         // Asynchronous fetch request
         try {
-            console.log('sending request to server...');
-
             // send fetch request to server
             // use axios??
+            console.log('sending request to server...');
             const response = await fetch('http://localhost:3000/signup', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -72,13 +69,14 @@ export default function Signup() {
     return (
         <>
         <Navigationbar/>
-        <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-            <form onSubmit={handleSubmit}>
-                <Input type="text" name="firstName" value={formData.firstName} placeholder="Enter your first name" onChange={handleChange} required />
-                <Input type="text" name="lastName" value={formData.lastName} placeholder="Enter your last name" onChange={handleChange} required />
-                <Input type="text" name="username" value={formData.username} placeholder="Enter your username" onChange={handleChange} required />
-                <Input type="password" name="password" value={formData.password} placeholder="Enter your password" onChange={handleChange} required />
-                <button type="submit">Sign up</button>
+        <div className="signupContainer flex w-full flex-wrap md:flex-nowrap gap-4">
+            <h2>Sign Up Page</h2>
+            <form className="formContainer"  onSubmit={handleSubmit}>
+                <Input className="userFormItem" type="text" name="firstName" value={formData.firstName} placeholder="Enter your first name" onChange={handleChange} required style={{ border: 'none'}} />
+                <Input className="userFormItem" type="text" name="lastName" value={formData.lastName} placeholder="Enter your last name" onChange={handleChange} required style={{ border: 'none'}}  />
+                <Input className="userFormItem" type="text" name="username" value={formData.username} placeholder="Enter your username" onChange={handleChange} required style={{ border: 'none'}}  />
+                <Input className="userFormItem" type="password" name="password" value={formData.password} placeholder="Enter your password" onChange={handleChange} required  style={{ border: 'none'}} />
+                <Button type="submit" color="primary" className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg userFormItem" size="md">Sign up</Button>
             </form>
         </div>
         </>
